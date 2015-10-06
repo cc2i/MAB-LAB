@@ -64,8 +64,10 @@ $mSelectedAppId = $mNavCtl->getParam('app', '-1');
 					<option value="-1" >-----------</option>
 					<?php 
 						$arr = DbHelper::selectRows(TBL_MILESTONES, null, MILE_DUEDATE.' ASC', MILE_ID.', '.MILE_NAME);												
-						foreach ($arr as $mile) {
-							?><option value="<?php echo $mile->mile_id; ?>" <?php if ($filterOpts['mId']==$mile->mile_id) echo 'selected="selected"'; ?> ><?php echo $mile->mile_name; ?></option><?php 
+						if (is_array($arr) && count($arr)>0){
+							foreach ($arr as $mile) {
+								?><option value="<?php echo $mile->mile_id; ?>" <?php if ($filterOpts['mId']==$mile->mile_id) echo 'selected="selected"'; ?> ><?php echo $mile->mile_name; ?></option><?php 
+							}
 						}
 					?>
 				</select>
